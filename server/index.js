@@ -14,6 +14,7 @@ app.use('/api/vendors', require('./routes/vendors'));
 app.use('/api/categories', require('./routes/categories'));
 app.use('/api/reviews', require('./routes/reviews'));
 app.use('/api/analytics', require('./routes/analytics'));
+app.use('/api/reset', require('./routes/reset'));
 
 // Serve static build output (for production / local preview)
 const distPath = path.join(__dirname, '..', 'dist');
