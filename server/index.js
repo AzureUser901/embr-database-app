@@ -1,9 +1,11 @@
 const express = require('express');
 const path = require('path');
 const errorHandler = require('./middleware/errorHandler');
+const requestLogger = require('./middleware/requestLogger');
 
 const app = express();
 app.use(express.json());
+app.use(requestLogger);
 
 // API routes
 app.use('/', require('./routes/health'));
@@ -28,6 +30,14 @@ app.get('*', (req, res, next) => {
 });
 
 app.use(errorHandler);
+
+// Crash visibility: surface uncaught errors on stdout/stderr so they show up in the Logs viewer.
+process.on('uncaughtException', (err) => {
+  console.error('uncaughtException:', err && err.stack ? err.stack : err);
+});
+process.on('unhandledRejection', (reason) => {
+  console.error('unhandledRejection:', reason);
+});
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
