@@ -21,7 +21,7 @@ export default function Layout({ currentPage, onNavigate, onSearch, collapsed, o
       <aside className={`sidebar${collapsed ? ' collapsed' : ''}`}>
         <div className="brand">
           <div className="brand-icon">S</div>
-          <span className="brand-text">ShopStream</span>
+          <span className="brand-text">Store number one</span>
         </div>
         <nav className="nav">
           {NAV_ITEMS.map((item) => (
